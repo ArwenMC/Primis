@@ -8,6 +8,10 @@
     <artifactId>Primis</artifactId>
     <version>1.0</version>
 
+    <properties>
+        <finalName>${project.artifactId}-${project.version}</finalName>
+    </properties>
+
     <repositories>
         <repository>
             <id>spigot-repo</id>
@@ -24,4 +28,8 @@
             <scope>provided</scope>
         </dependency>
     </dependencies>
+
+    <build>
+        <finalName>${finalName}</finalName>
+    </build>
 </project>

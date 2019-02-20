@@ -1,13 +1,32 @@
+# Travis build script for mineman
+
+# Use new container infrastructure to enable caching
 sudo: false
+
+# Use Maven
 language: java
-jdk:
-        - oraclejdk8
-before_install:
-install:
-        - mvn install package
-after_success:
-        - mvn clean
+
+# Caching so the next build will be fast too.
 cache:
         directories:
                 - $HOME/.m2
-                - BuildTools
+
+# Only re-download spigot if we don't have spigot in the repo
+before_install:
+        - if [ ! -d "$HOME/.m2/repository/org/spigotmc" ]; then ./installSpigot.sh 1.13 ; else echo "Not compiling Spigot because it is already in our maven" ; fi
+
+# Set the final name using pom-fu
+install:
+        - mvn install -DfinalName=release -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+
+# You fill out this section by encrypting the key using the travis utility
+# Note that the api_key is safe to put here because it is actually encrypted
+deploy:
+        provider: releases
+        api_key:
+                secure: mHvU+sR47QVxrLPWhrpIfIXbQmmFppXUlLyquuRMkQml+7nHprkGokq5xwD/MPiT/SSz3IijuQoCBlx0rBJ4u2YyRd2E0AqOWDaKcm5hmu0PJOAS92REbIJcv0x3XCkX/+vKa2DxFtxxb8CZ2DyAm3Y/bA0Dko7wR686B3WBcUQW8jwr58IYv7uiwOEdUHnptxETGeWhTpNvFOlKFd33WdoXHLr/l6C4fyxSFpS5p2y7yQqgGxnTqxnxBwTFZy4AcpvpaFZU0TfJzYUcCFaEZelTzgIjONFhOfg4sYUyZ3yJ5UBkGYTLxL6skdWwF8aQHDDlaI/ZMPmkmrfRw51S1r4nKtTruivATEJcm39Uw3gcF0t1bWbe9tgPylLXQd1D/dLj3Iopl3fODVzROy0uPvrm8HuCQkzGTxYmB/WaHrtCD4QaMiTNqPv83lj3Yz8TLWAvA70LP7FaRCmvLvrIwKE4GI+XoFZ4BJdD3y04+xX07XJQYRUPkSvHhAgKSfz9boYZRombFiLDsOHpDKcRUAQ0glegFxYA1UDbDpL1Ix0nJULBnbS2PlW9w3LImAUgbxhinhgv8JPuCk0IbPcdBxk+BnsoDttIuCx17ehVI3X7hbPDeEI1L4r5LVywht98n/e+VanzuOkFEU5TYke5SyjbzDRXUclSntnZOgyHVHI=
+        file: target/Primis.jar
+        skip_cleanup: true
+        # Modify this to build on every commit
+        on:
+                tags: true
