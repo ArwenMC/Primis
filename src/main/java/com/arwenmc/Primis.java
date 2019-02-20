@@ -1,6 +1,6 @@
 package com.arwenmc;
 
-import com.arwenmc.listeners.FirstJoinEvent;
+import com.arwenmc.listeners.PlayerEvent;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -21,7 +21,7 @@ public class Primis extends JavaPlugin {
     public void onEnable() {
         getLogger().info(plugin.getFullName() + " version: " + plugin.getVersion() + " has been enabled.");
 
-        pm.registerEvents(new FirstJoinEvent(), this);
+        pm.registerEvents(new PlayerEvent(), this);
 
         config.options().copyDefaults(true);
         saveConfig();

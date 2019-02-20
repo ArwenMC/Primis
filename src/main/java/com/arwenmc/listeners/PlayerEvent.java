@@ -8,12 +8,12 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
-public class FirstJoinEvent implements Listener {
+public class OnPlayerJoinEvent implements Listener {
 
     Primis plugin;
 
     @EventHandler
-    public void onPlayerJoinEvent(PlayerJoinEvent event) {
+    public void playerFirstJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
         if (!player.hasPlayedBefore()) {
             for (Player p : Bukkit.getOnlinePlayers()) {
