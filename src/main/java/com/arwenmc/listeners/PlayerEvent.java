@@ -8,7 +8,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
-public class OnPlayerJoinEvent implements Listener {
+public class PlayerEvent implements Listener {
 
     Primis plugin;
 
