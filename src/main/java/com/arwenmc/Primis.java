@@ -31,5 +31,7 @@ public class Primis extends JavaPlugin {
     public void onDisable() {
         getLogger().info(plugin.getFullName() + " version: " + plugin.getVersion() + " has been disabled.");
     }
+
+
 }
 
