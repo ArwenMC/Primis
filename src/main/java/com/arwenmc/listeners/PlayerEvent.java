@@ -18,7 +18,7 @@ public class PlayerEvent implements Listener {
         if (plugin.getConfig().getBoolean("first_join.enabled")) {
             if (!player.hasPlayedBefore()) {
                 for (Player p : Bukkit.getOnlinePlayers()) {
-                    String msg = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("first_join.on_first_join").replace("{PLAYER}", player.getDisplayName()));
+                    String msg = plugin.getConfig("first_join.on_first_join").replace("{PLAYER}", player.getDisplayName());
                     p.sendMessage(msg);
                 }
             }

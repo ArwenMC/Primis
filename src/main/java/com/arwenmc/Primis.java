@@ -14,8 +14,8 @@ public class Primis extends JavaPlugin {
     FileConfiguration config = this.getConfig();
     PluginManager pm = Bukkit.getPluginManager();
 
-    public final String NOT_PLAYER = (config.getString("messages.not_player") == null) ? ChatColor.RED + "You must be a player to use this command." : config.getString("messages.not_player");
-    public final String NO_PERMISSION = (config.getString("messages.no_permission") == null) ? ChatColor.RED + "You do not have permission to use this comnmand." : config.getString("messages.no_permission");
+    public final String NOT_PLAYER = getConfig("messages.not_player");
+    public final String NO_PERMISSION = getConfig("messages.no_permission");
 
     @Override
     public void onEnable() {
@@ -32,6 +32,10 @@ public class Primis extends JavaPlugin {
         getLogger().info(plugin.getFullName() + " version: " + plugin.getVersion() + " has been disabled.");
     }
 
-
+    public String getConfig(String path) {
+        String str = this.getConfig().getString(path);
+        ChatColor.translateAlternateColorCodes('&', str);
+        return str;
+    }
 }
 
