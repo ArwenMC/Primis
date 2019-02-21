@@ -25,4 +25,10 @@ public class PlayerEvent implements Listener {
         }
     }
 
+    @EventHandler
+    public void staffJoin(PlayerJoinEvent event) {
+        Player player = event.getPlayer();
+
+    }
+
 }
