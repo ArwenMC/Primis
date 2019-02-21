@@ -2,7 +2,6 @@
 messages:
   not_player: "&cYou must be a player to use this command."
   no_permission: "&cYou do not have permission to use this command."
-
 first_join:
   enabled: true
   on_first_join: "&aWelcome to Server we hope you enjoy your stay {PLAYER}!"
